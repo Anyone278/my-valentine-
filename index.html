@@ -1,402 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Piyasa, Will You Be My Valentine? ❤️</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VILLAIN BABY MODE ACTIVATED</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffecd2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-            padding: 20px;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* Floating hearts background */
-        .heart-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-        }
+body {
+    font-family: Comic Sans MS, cursive, sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+}
 
-        .heart {
-            position: absolute;
-            font-size: 20px;
-            opacity: 0.3;
-            animation: float 10s infinite;
-        }
+.container {
+    background: white;
+    padding: 40px 25px;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    max-width: 420px;
+    width: 100%;
+    transition: transform 0.2s ease;
+}
 
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-            }
-        }
+h1 {
+    color: #ff1493;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
 
-        .container {
-            background: white;
-            padding: 40px 25px;
-            border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            max-width: 420px;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-        }
+.emoji {
+    font-size: 60px;
+    margin: 10px 0;
+}
 
-        h1 {
-            color: #e91e63;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            animation: pulse 2s infinite;
-        }
+.question {
+    font-size: 1.4em;
+    margin: 20px 0;
+}
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
+.name {
+    color: #ff1493;
+    font-weight: bold;
+}
 
-        .emoji {
-            font-size: 60px;
-            margin: 15px 0;
-            animation: bounce 1s infinite;
-        }
+button {
+    padding: 15px 40px;
+    margin: 10px;
+    font-size: 1em;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: bold;
+    flex-shrink: 0;
+}
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: nowrap;
+}
 
-        .question {
-            font-size: 1.5em;
-            color: #333;
-            margin: 25px 0;
-            font-weight: bold;
-            line-height: 1.4;
-        }
+.yes-btn {
+    background: hotpink;
+    color: white;
+    transform-origin: center;
+}
 
-        .name {
-            color: #e91e63;
-            font-size: 1.1em;
-        }
+.no-btn {
+    background: lightgray;
+    transform-origin: center;
+}
 
-        .button-container {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 30px;
-            position: relative;
-            min-height: 120px;
-            flex-wrap: wrap;
-        }
+.warning {
+    margin-top: 20px;
+    min-height: 50px;
+    font-size: 0.95em;
+    color: crimson;
+    font-weight: bold;
+    line-height: 1.3;
+}
 
-        button {
-            padding: 18px 45px;
-            font-size: 1.1em;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            touch-action: manipulation;
-        }
+.success {
+    display: none;
+}
 
-        .yes-btn {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            position: relative;
-            z-index: 10;
-        }
-
-        .yes-btn:active {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
-        }
-
-        .no-btn {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            color: #333;
-            position: absolute;
-            transition: all 0.15s ease;
-            z-index: 5;
-        }
-
-        .no-btn:active {
-            transform: scale(1.05);
-        }
-
-        .success {
-            display: none;
-        }
-
-        .success.show {
-            display: block;
-            animation: fadeIn 1s;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .success h2 {
-            color: #e91e63;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-
-        .success .celebration {
-            font-size: 80px;
-            margin: 25px 0;
-        }
-
-        .warning {
-            color: #ff6b6b;
-            font-size: 1em;
-            margin-top: 20px;
-            font-weight: 600;
-            display: none;
-            min-height: 50px;
-            line-height: 1.4;
-        }
-
-        .warning.show {
-            display: block;
-            animation: shake 0.5s;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        /* Mobile optimizations */
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px 20px;
-            }
-            
-            h1 {
-                font-size: 1.5em;
-            }
-            
-            .question {
-                font-size: 1.3em;
-            }
-            
-            .emoji {
-                font-size: 50px;
-            }
-            
-            button {
-                padding: 15px 35px;
-                font-size: 1em;
-            }
-
-            .success h2 {
-                font-size: 2em;
-            }
-
-            .success .celebration {
-                font-size: 70px;
-            }
-        }
-    </style>
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 20px;
+    }
+    h1 {
+        font-size: 1.3em;
+    }
+    .question {
+        font-size: 1.2em;
+    }
+}
+</style>
 </head>
-<body>
-    <div class="heart-bg" id="heartBg"></div>
-    
-    <div class="container">
-        <div class="question-section" id="questionSection">
-            <h1>Happy Valentine's Day! 💕</h1>
-            <div class="emoji">🌹</div>
-            <p class="question">
-                Hey <span class="name">Piyasa</span>,<br>
-                Will you be my Valentine?
-            </p>
-            
-            <div class="button-container" id="buttonContainer">
-                <button class="yes-btn" onclick="handleYes()">Yes! 💖</button>
-                <button class="no-btn" id="noBtn" ontouchstart="handleNo(event)" onclick="handleNo(event)">No</button>
-            </div>
-            
-            <p class="warning" id="warning"></p>
-        </div>
 
-        <div class="success" id="successSection">
-            <h2>Yay! 🎉</h2>
-            <div class="celebration">💑</div>
-            <h1>You're My Valentine, Piyasa!</h1>
-            <p style="font-size: 1.2em; color: #666; margin-top: 20px;">
-                I knew you'd say yes! ❤️<br>
-                Love you! 💕
-            </p>
-        </div>
+<body>
+
+<div class="container" id="container">
+
+<div id="questionSection">
+    <h1>🎭 VILLAIN ANNOUNCEMENT 🎭</h1>
+    <div class="emoji">🥺</div>
+
+    <p class="question">
+        Attention <span class="name">Piyasa</span>,<br>
+        You WILL be my Valentine.
+    </p>
+
+    <div class="button-container">
+        <button class="yes-btn" onclick="handleYes()">FINE 💖</button>
+        <button class="no-btn" id="noBtn" onclick="handleNo(event)">No</button>
     </div>
 
-    <script>
-        let noClickCount = 0;
-        let isRunningAway = false;
+    <div class="warning" id="warning"></div>
+</div>
 
-        // Rage bait messages
-        const rageBaitMessages = [
-            "Are you sure? Please say yes, Piyasa! 🥺",
-            "Come on poopyass, you know you want to! 😏",
-            "Seriously? Stop being difficult! 😤",
-            "POOPYASS! Just say yes already! 😂",
-            "You're really gonna make me beg? Fine... PLEASE! 🙏",
-            "I see how it is, poopyass... 😒",
-            "You really thought you could say no? 😈"
-        ];
+<div class="success" id="successSection">
+    <h1>HAHA I WIN! 😈</h1>
+    <div class="emoji">💑</div>
+    <p style="margin-top:20px;font-size:1.1em;line-height:1.5;">
+        See <span style="color:#ff1493;font-weight:bold;">Piyasa</span>?<br>
+        I TOLD YOU.<br>
+        Villain always wins!<br><br>
+        <strong style="font-size:1.2em;">I love you more! 💕</strong>
+    </p>
+</div>
 
-        // Create floating hearts background
-        function createHearts() {
-            const heartBg = document.getElementById('heartBg');
-            for (let i = 0; i < 12; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = '❤️';
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 10 + 's';
-                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-                heartBg.appendChild(heart);
-            }
-        }
+</div>
 
-        function handleYes() {
-            document.getElementById('questionSection').classList.remove('show');
-            document.getElementById('questionSection').style.display = 'none';
-            document.getElementById('successSection').classList.add('show');
-            
-            // Create celebration confetti effect
-            createConfetti();
-        }
+<script>
 
-        function handleNo(event) {
-            event.preventDefault();
-            noClickCount++;
-            const warning = document.getElementById('warning');
-            const noBtn = document.getElementById('noBtn');
+let noClickCount = 0;
 
-            if (noClickCount === 1) {
-                warning.textContent = rageBaitMessages[0];
-                warning.classList.add('show');
-            } else if (noClickCount === 2) {
-                warning.textContent = rageBaitMessages[1];
-                isRunningAway = true;
-                noBtn.textContent = "Nope! 😜";
-            } else if (noClickCount >= 3 && noClickCount <= 8) {
-                // Update message
-                const messageIndex = Math.min(noClickCount - 1, rageBaitMessages.length - 1);
-                warning.textContent = rageBaitMessages[messageIndex];
-                
-                // Move button
-                moveNoButton();
-            } else {
-                // After 8 clicks, treat it as yes with special message
-                warning.textContent = "That's it! I'm counting this as a YES! 😤💕";
-                setTimeout(() => {
-                    handleYes();
-                }, 1000);
-            }
-        }
+const dramaticMessages = [
+    "Excuse me??? PIYASA?? 🥺",
+    "Oh so you wanna play games poopyass? 💩",
+    "Wow. WOW. Really?",
+    "Nenenenenenanana you can't escape! 😂",
+    "I'm watching you Piyasa. 👀",
+    "This is SO rude poopyass 💩",
+    "I'm literally crying rn",
+    "Nenenenene! Keep trying! 😈",
+    "Okay Piyasa I'm getting MAD",
+    "POOPYASS STOP IT 💩",
+    "I will throw a tantrum",
+    "Nenenenene you're so STUBBORN!",
+    "Fine. Be like that Piyasa.",
+    "I'm telling EVERYONE poopyass",
+    "Your mom. Your dad. EVERYONE.",
+    "Nenenenene still clicking? 😤",
+    "This is embarrassing for you Piyasa",
+    "I'm the villain here poopyass, not you",
+    "Okay that's it. WhatsApp opening.",
+    "Mom's contact pulled up Piyasa...",
+    "Typing the message now poopyass...",
+    "Nenenenene last chance! 💩",
+    "Sent. She knows now Piyasa. 😈",
+    "Actually I didn't send it poopyass",
+    "BUT I COULD HAVE",
+    "Nenenenene you're so dramatic! 🙄",
+    "Fine. I'll just MAKE you say yes Piyasa.",
+    "VILLAIN MODE ACTIVATED poopyass 💩",
+    "You have NO power here!",
+    "NENENENENE TOO LATE PIYASA! 😂",
+    "You're my Valentine now poopyass. Deal with it. 💕"
+];
 
-        function moveNoButton() {
-            const noBtn = document.getElementById('noBtn');
-            const container = document.querySelector('.button-container');
-            const containerRect = container.getBoundingClientRect();
-            
-            // Random position within the container - optimized for mobile
-            const maxX = containerRect.width - 120;
-            const maxY = containerRect.height - 60;
-            
-            const randomX = (Math.random() * maxX) - (maxX / 2);
-            const randomY = (Math.random() * maxY) - 20;
-            
-            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-        }
+function handleYes() {
+    document.getElementById("questionSection").style.display = "none";
+    document.getElementById("successSection").style.display = "block";
+}
 
-        // Move button on touch/hover when it's in running away mode
-        document.getElementById('noBtn').addEventListener('touchstart', function(e) {
-            if (isRunningAway && noClickCount > 2) {
-                e.preventDefault();
-                moveNoButton();
-                setTimeout(() => {
-                    handleNo(e);
-                }, 50);
-            }
-        });
+function handleNo(event) {
+    event.preventDefault();
+    noClickCount++;
 
-        document.getElementById('noBtn').addEventListener('mouseenter', function() {
-            if (isRunningAway && noClickCount > 2) {
-                moveNoButton();
-            }
-        });
+    const warning = document.getElementById("warning");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.querySelector(".yes-btn");
+    const container = document.getElementById("container");
 
-        function createConfetti() {
-            const colors = ['#ff6b6b', '#ff69b4', '#ffd93d', '#6bcf7f', '#4ecdc4'];
-            for (let i = 0; i < 80; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.left = Math.random() * window.innerWidth + 'px';
-                confetti.style.top = '-10px';
-                confetti.style.opacity = '1';
-                confetti.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
-                confetti.style.transition = 'all 3s ease-out';
-                confetti.style.zIndex = '1000';
-                confetti.style.borderRadius = '50%';
-                
-                document.body.appendChild(confetti);
-                
-                setTimeout(() => {
-                    confetti.style.top = window.innerHeight + 'px';
-                    confetti.style.opacity = '0';
-                }, 100);
-                
-                setTimeout(() => {
-                    confetti.remove();
-                }, 3000);
-            }
-        }
+    if (noClickCount <= dramaticMessages.length) {
+        warning.textContent = dramaticMessages[noClickCount - 1];
+    }
 
-        // Initialize
-        createHearts();
-    </script>
+    // Dramatic shake gets more intense
+    const shakeIntensity = 1.02 + (noClickCount * 0.005);
+    container.style.transform = `scale(${shakeIntensity})`;
+    setTimeout(() => {
+        container.style.transform = "scale(1)";
+    }, 150);
+
+    // Shrink No button AGGRESSIVELY but keep it tappable
+    const shrink = Math.max(1 - noClickCount * 0.04, 0.5); // Changed from 0.08 to 0.04 and min from 0.15 to 0.5
+    noBtn.style.transform = `scale(${shrink})`;
+
+    // Grow Yes button MASSIVE but not too crazy
+    const grow = 1 + noClickCount * 0.08; // Changed from 0.12 to 0.08
+    yesBtn.style.transform = `scale(${grow})`;
+    
+    // Change Yes button text as it grows
+    if (noClickCount < 5) {
+        yesBtn.textContent = "JUST PRESS THIS 😤💖";
+    } else if (noClickCount < 10) {
+        yesBtn.textContent = "PIYASA PRESS IT 😡💕";
+    } else if (noClickCount < 15) {
+        yesBtn.textContent = "POOPYASS CLICK HERE 💩💖";
+    } else if (noClickCount < 20) {
+        yesBtn.textContent = "I WILL CRY 😭💕";
+    } else {
+        yesBtn.textContent = "VILLAIN WINS 😈💖";
+    }
+
+    // After 25+ clicks (more than 20 as requested), force yes
+    if (noClickCount >= 25) {
+        warning.textContent = "TOO LATE POOPYASS! VILLAIN MODE COMPLETE! 😈💕";
+        setTimeout(() => {
+            handleYes();
+        }, 1200);
+    }
+}
+
+</script>
+
 </body>
 </html>
